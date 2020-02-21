@@ -1,0 +1,19 @@
+apply from: rootProject.file("gradle/library-module.gradle")
+
+apply plugin: 'kotlinx-serialization'
+
+dependencies {
+    api(project(path: ":habits:models"))
+
+    api(Libs.control_core)
+    api(Libs.koin_core)
+    api(Libs.kotlinx_coroutines_core)
+    api(Libs.threetenabp)
+    api(Libs.timber)
+
+    implementation(Libs.kotlinx_serialization_runtime)
+    implementation(Libs.ktor_client_cio)
+    implementation(Libs.ktor_client_json_jvm)
+    implementation(Libs.ktor_client_serialization_jvm)
+    implementation(Libs.ktor_client_logging_jvm)
+}

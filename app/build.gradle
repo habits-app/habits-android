@@ -1,0 +1,146 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdkVersion rootProject.ext.buildConfig.compileSdkVersion
+
+    defaultConfig {
+        versionCode 1
+        versionName '1.0.0'
+
+        applicationId "com.habits.app"
+        setProperty("archivesBaseName", "Habits-v$versionName-b$versionCode")
+
+        targetSdkVersion rootProject.ext.buildConfig.targetSdkVersion
+        minSdkVersion rootProject.ext.buildConfig.minSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'mykeyalias'
+            keyPassword 'mykeypassword'
+            storeFile file('../keystore.jks')
+            storePassword 'mykeystorepassword'
+        }
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix '-DEBUG'
+            minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "type"
+    productFlavors {
+        dev {
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "Habits Dev"
+            resValue "string", "leak_canary_display_activity_label", "Habits Leaks"
+            dimension "type"
+        }
+        prod {
+            resValue "string", "app_name", "Habits"
+            dimension "type"
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/kotlinx-io.kotlin_module'
+        pickFirst 'META-INF/atomicfu.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-io.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
+        pickFirst 'META-INF/kotlinx-serialization-runtime.kotlin_module'
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
+
+apply from: rootProject.file("gradle/test-dependencies.gradle")
+apply from: rootProject.file("gradle/test-dependencies-android.gradle")
+
+dependencies {
+    implementation(project(path: ":habits:core"))
+
+    implementation(Libs.activity_ktx)
+    implementation(Libs.appcompat)
+    implementation(Libs.browser)
+    implementation(Libs.constraintlayout)
+    implementation(Libs.coil)
+    implementation(Libs.control_core)
+    implementation(Libs.core_ktx)
+    implementation(Libs.flowbinding_activity)
+    implementation(Libs.flowbinding_android)
+    implementation(Libs.flowbinding_appcompat)
+    implementation(Libs.flowbinding_core)
+    implementation(Libs.flowbinding_drawerlayout)
+    implementation(Libs.flowbinding_lifecycle)
+    implementation(Libs.flowbinding_material)
+    implementation(Libs.flowbinding_navigation)
+    implementation(Libs.flowbinding_preference)
+    implementation(Libs.flowbinding_recyclerview)
+    implementation(Libs.flowbinding_swiperefreshlayout)
+    implementation(Libs.flowbinding_viewpager2)
+    implementation(Libs.fragment_ktx)
+    implementation(Libs.koin_android)
+    implementation(Libs.koin_androidx_scope)
+    implementation(Libs.koin_androidx_viewmodel)
+    implementation(Libs.lifecycle_runtime_ktx)
+    implementation(Libs.lifecycle_viewmodel_ktx)
+    implementation(Libs.material)
+    implementation(Libs.navigation_fragment_ktx)
+    implementation(Libs.navigation_ui_ktx)
+    implementation(Libs.viewpager2)
+
+    debugImplementation(Libs.leakcanary_android)
+}
