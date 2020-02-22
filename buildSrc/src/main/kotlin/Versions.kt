@@ -22,7 +22,7 @@ object Versions {
 
     const val org_jetbrains_kotlin: String = "1.3.61"
 
-    const val androidx_navigation: String = "2.2.1"
+    const val androidx_navigation: String = "2.3.0-alpha02"
 
     const val androidx_lifecycle: String = "2.2.0"
 

@@ -5,4 +5,5 @@ import org.koin.dsl.module
 
 internal val detailModule = module {
     viewModel { OverviewViewModel(dispatcherProvider = get()) }
+    factory { OverviewAdapter() }
 }

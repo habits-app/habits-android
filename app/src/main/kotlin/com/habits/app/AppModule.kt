@@ -10,6 +10,7 @@ import org.koin.dsl.module
 
 internal val appModule = module {
     single { provideAppBuildInfo(context = androidContext()) }
+    single { AppCoordinator() }
 }
 
 private fun provideAppBuildInfo(context: Context): AppBuildInfo = AppBuildInfo(
