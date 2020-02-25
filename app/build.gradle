@@ -100,10 +100,15 @@ android {
         pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
         pickFirst 'META-INF/kotlinx-serialization-runtime.kotlin_module'
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 androidExtensions {
     experimental = true
+    features = ["parcelize"]
 }
 
 apply from: rootProject.file("gradle/test-dependencies.gradle")

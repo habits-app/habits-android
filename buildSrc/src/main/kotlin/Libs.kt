@@ -110,18 +110,6 @@ object Libs {
             Versions.io_github_reactivecircus_flowbinding
 
     /**
-     * https://github.com/tailoredmedia/AndroidAppUtil
-     */
-    const val util_permissions: String = "com.tailoredapps.androidutil:util-permissions:" +
-            Versions.com_tailoredapps_androidutil
-
-    /**
-     * https://github.com/tailoredmedia/AndroidAppUtil
-     */
-    const val util_ui: String = "com.tailoredapps.androidutil:util-ui:" +
-            Versions.com_tailoredapps_androidutil
-
-    /**
      * https://developer.android.com/testing
      */
     const val espresso_contrib: String = "androidx.test.espresso:espresso-contrib:" +

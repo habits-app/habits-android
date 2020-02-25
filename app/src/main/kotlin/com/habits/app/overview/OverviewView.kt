@@ -7,7 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import at.florianschuster.control.bind
 import at.florianschuster.control.distinctMap
 import com.habits.app.R
-import kotlinx.android.synthetic.main.fragment_overview.*
+import com.habits.app.ext.viewBinding
+import com.habits.app.databinding.FragmentOverviewBinding
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -16,13 +17,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OverviewView : Fragment(R.layout.fragment_overview) {
 
+    private val binding by viewBinding(FragmentOverviewBinding::bind)
     private val viewModel: OverviewViewModel by viewModel()
     private val adapter: OverviewAdapter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        overviewRecyclerView.adapter = adapter
+        binding.overviewRecyclerView.adapter = adapter
 
         adapter.interaction
             .filterIsInstance<OverviewAdapterInteraction.HabitClicked>()

@@ -1,20 +1,17 @@
 package com.habits.app.overview
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.habits.app.R
-import com.habits.app.ext.inflate
+import com.habits.app.databinding.ItemOverviewBinding
 import com.habits.models.Habit
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_overview.*
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 
-sealed class OverviewAdapterInteraction {
+internal sealed class OverviewAdapterInteraction {
     data class HabitClicked(val habit: Habit) : OverviewAdapterInteraction()
 }
 
@@ -23,7 +20,7 @@ internal class OverviewAdapter : ListAdapter<Habit, HabitViewHolder>(diffUtilIte
     val interaction: Flow<OverviewAdapterInteraction> get() = _interaction.asFlow()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder =
-        HabitViewHolder(parent.inflate(R.layout.item_overview))
+        HabitViewHolder(ItemOverviewBinding.inflate(LayoutInflater.from(parent.context)))
 
     override fun onBindViewHolder(holder: HabitViewHolder, position: Int) =
         holder.bind(getItem(position)) { _interaction.offer(it) }
@@ -40,13 +37,13 @@ internal class OverviewAdapter : ListAdapter<Habit, HabitViewHolder>(diffUtilIte
 }
 
 internal class HabitViewHolder(
-    override val containerView: View
-) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    private val binding: ItemOverviewBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(habit: Habit, interaction: (OverviewAdapterInteraction) -> Unit) {
-        containerView.setOnClickListener {
+        binding.root.setOnClickListener {
             interaction(OverviewAdapterInteraction.HabitClicked(habit))
         }
-        itemOverViewTitle.text = habit.toString()
+        binding.itemOverViewTitle.text = habit.toString()
     }
 }
