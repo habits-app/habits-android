@@ -1,11 +1,11 @@
 package com.habits.app.overview
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.habits.app.databinding.ItemOverviewBinding
+import com.habits.app.ext.viewBinding
 import com.habits.models.Habit
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ internal class OverviewAdapter : ListAdapter<Habit, HabitViewHolder>(diffUtilIte
     val interaction: Flow<OverviewAdapterInteraction> get() = _interaction.asFlow()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder =
-        HabitViewHolder(ItemOverviewBinding.inflate(LayoutInflater.from(parent.context)))
+        HabitViewHolder(parent.viewBinding(ItemOverviewBinding::inflate))
 
     override fun onBindViewHolder(holder: HabitViewHolder, position: Int) =
         holder.bind(getItem(position)) { _interaction.offer(it) }
@@ -41,9 +41,7 @@ internal class HabitViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(habit: Habit, interaction: (OverviewAdapterInteraction) -> Unit) {
-        binding.root.setOnClickListener {
-            interaction(OverviewAdapterInteraction.HabitClicked(habit))
-        }
+        binding.root.setOnClickListener { interaction(OverviewAdapterInteraction.HabitClicked(habit)) }
         binding.itemOverViewTitle.text = habit.toString()
     }
 }
