@@ -20,7 +20,7 @@ internal class OverviewAdapter : ListAdapter<Habit, HabitViewHolder>(diffUtilIte
     val interaction: Flow<OverviewAdapterInteraction> get() = _interaction.asFlow()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder =
-        HabitViewHolder(parent.viewBinding(ItemOverviewBinding::inflate))
+        HabitViewHolder(parent.viewBinding { ItemOverviewBinding.inflate(it, parent, false) })
 
     override fun onBindViewHolder(holder: HabitViewHolder, position: Int) =
         holder.bind(getItem(position)) { _interaction.offer(it) }
