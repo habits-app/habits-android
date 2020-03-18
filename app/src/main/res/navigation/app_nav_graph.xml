@@ -9,4 +9,21 @@
         android:id="@+id/overview"
         android:name="com.habits.app.overview.OverviewView"
         tools:layout="@layout/fragment_overview" />
+
+    <action
+        android:id="@+id/action_to_habit"
+        app:destination="@id/habit"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/stay"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/habit"
+        android:name="com.habits.app.habit.HabitView"
+        tools:layout="@layout/fragment_habit">
+
+        <argument
+            android:name="habitId"
+            app:argType="long" />
+    </fragment>
 </navigation>

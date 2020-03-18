@@ -2,7 +2,7 @@ package com.habits.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -11,7 +11,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        coordinator.attachNavigator(findNavController(R.id.navHost))
+        coordinator.attachNavigator(
+            (supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment).navController
+        )
     }
 
     override fun onDestroy() {

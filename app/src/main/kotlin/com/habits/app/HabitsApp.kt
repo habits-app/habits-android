@@ -1,6 +1,7 @@
 package com.habits.app
 
 import android.app.Application
+import at.florianschuster.control.ControllerLog
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.habits.app.core.coreModule
 import org.koin.android.ext.koin.androidContext
@@ -14,10 +15,9 @@ class HabitsApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Timber.plant(Timber.DebugTree())
-
         AndroidThreeTen.init(this)
-
+        Timber.plant(Timber.DebugTree())
+        ControllerLog.default = ControllerLog.Custom { Timber.i(it) }
         startKoin {
             androidContext(this@HabitsApp)
             androidLogger(Level.INFO)

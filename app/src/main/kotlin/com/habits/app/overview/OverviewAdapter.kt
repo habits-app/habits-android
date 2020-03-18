@@ -8,6 +8,7 @@ import com.habits.app.databinding.ItemOverviewBinding
 import com.habits.app.ext.viewBinding
 import com.habits.models.Habit
 import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.Channel.Factory.BUFFERED
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 
@@ -16,7 +17,7 @@ internal sealed class OverviewAdapterInteraction {
 }
 
 internal class OverviewAdapter : ListAdapter<Habit, HabitViewHolder>(diffUtilItemCallback) {
-    private val _interaction = BroadcastChannel<OverviewAdapterInteraction>(1)
+    private val _interaction = BroadcastChannel<OverviewAdapterInteraction>(BUFFERED)
     val interaction: Flow<OverviewAdapterInteraction> get() = _interaction.asFlow()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder =

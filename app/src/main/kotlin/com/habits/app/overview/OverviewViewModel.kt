@@ -3,6 +3,7 @@ package com.habits.app.overview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.florianschuster.control.Controller
+import at.florianschuster.control.Mutator
 import at.florianschuster.control.createController
 import com.habits.app.AppCoordinator
 import com.habits.app.AppRoute
@@ -27,9 +28,9 @@ internal class OverviewViewModel(
     )
 
     val controller: Controller<Action, Mutation, State> = viewModelScope.createController(
-        initialState = State(),
         dispatcher = dispatcherProvider.default,
-        mutator = { action, _ ->
+        initialState = State(),
+        mutator = Mutator { action,_,_ ->
             when (action) {
                 is Action.HabitClicked -> flow {
                     val route = AppRoute.ShowHabitDetail(action.habit)

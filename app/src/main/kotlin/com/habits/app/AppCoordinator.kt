@@ -1,6 +1,7 @@
 package com.habits.app
 
 import androidx.navigation.NavController
+import com.habits.app.habit.HabitViewDirections
 import com.habits.models.Habit
 
 sealed class AppRoute {
@@ -46,7 +47,6 @@ class AppCoordinator {
     }
 
     private fun showHabitDetail(route: AppRoute.ShowHabitDetail) {
-        route.habit
-        // todo
+        navigator?.navigate(HabitViewDirections.actionToHabit(route.habit.id))
     }
 }
