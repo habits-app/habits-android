@@ -30,7 +30,7 @@ internal class OverviewViewModel(
     val controller: Controller<Action, Mutation, State> = viewModelScope.createController(
         dispatcher = dispatcherProvider.default,
         initialState = State(),
-        mutator = Mutator { action,_,_ ->
+        mutator = { action ->
             when (action) {
                 is Action.HabitClicked -> flow {
                     val route = AppRoute.ShowHabitDetail(action.habit)

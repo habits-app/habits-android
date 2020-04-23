@@ -46,7 +46,7 @@ object Versions {
 
     const val activity_ktx: String = "1.1.0"
 
-    const val control_core: String = "0.6.2"
+    const val control_core: String = "0.7.1"
 
     const val fragment_ktx: String = "1.2.2"
 

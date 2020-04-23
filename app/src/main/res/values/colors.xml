@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/white</color>
-    <color name="colorPrimaryLight">@color/white</color>
-    <color name="colorPrimaryDark">@color/white</color>
-    <color name="colorAccent">@color/blue_500</color>
-    <color name="colorAccentLight">@color/blue_300</color>
-    <color name="colorAccentDark">@color/blue_700</color>
+    <color name="primaryColor">#fafafa</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#c7c7c7</color>
+    <color name="secondaryColor">#5c6bc0</color>
+    <color name="secondaryLightColor">#8e99f3</color>
+    <color name="secondaryDarkColor">#26418f</color>
+
+    <color name="primaryTextColor">#282828</color>
+    <color name="secondaryTextColor">#ffffff</color>
 
     <color name="windowBackground">@color/white</color>
-
-    <!--
-    text colors
-    -->
-    <color name="textDarkPrimary">#DE000000</color>
-    <color name="textDarkSecondary">#8A000000</color>
-    <color name="textDarkDisabled">#61000000</color>
-    <color name="textDarkHint">#61000000</color>
-    <color name="textLightPrimary">#FFFFFFFF</color>
-    <color name="textLightSecondary">#B3FFFFFF</color>
-    <color name="textLightDisabled">#80FFFFFF</color>
-    <color name="textLightHint">#80FFFFFF</color>
 
     <!--
     standard colors

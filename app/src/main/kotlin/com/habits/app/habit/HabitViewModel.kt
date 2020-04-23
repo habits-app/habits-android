@@ -36,7 +36,7 @@ class HabitViewModel(
         dispatcher = dispatcherProvider.default,
         initialState = State(),
         actionsTransformer = { it.onStart { emit(Action.InitialLoad) } },
-        mutator = Mutator { action, _, _ ->
+        mutator = { action ->
             when (action) {
                 is Action.InitialLoad -> flow {
                     emit(Mutation.SetHabit(Async.Loading))
@@ -46,7 +46,7 @@ class HabitViewModel(
                 }
             }
         },
-        reducer = Reducer { mutation, previousState ->
+        reducer = { mutation, previousState ->
             when (mutation) {
                 is Mutation.SetHabit -> previousState.copy(habit = mutation.habit)
             }
